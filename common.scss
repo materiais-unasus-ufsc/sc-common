@@ -2,16 +2,25 @@
 
 /* Variable overrides */
 
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+);
+
 $container-max-widths: (
   sm: 540px,
   md: 720px,
   lg: 960px,
   xl: 1140px,
-  // xxl: 1140px
 );
 
-
+@import "../../node_modules/bootstrap/scss/bootstrap-utilities.scss";
 @import "../../node_modules/bootstrap/scss/bootstrap-grid.scss";
+@import "../../node_modules/bootstrap/scss/popover.scss";
+
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playpen+Sans:wght@100..800&display=swap");
 
 $primary-purple: #a3a6d6;
@@ -33,6 +42,13 @@ body {
   hyphens: auto;
 }
 
+section {
+  > * {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+}
+
 h1,
 h2,
 h3,
@@ -46,16 +62,20 @@ h6 {
 h1 {
   color: $primary-purple;
   font-size: 40px;
+  font-weight: bold;
   line-height: 48px;
 }
 h2 {
   color: $primary-green;
   font-size: 32px;
+  font-weight: bold;
+  font-weight: bold;
   line-height: 40px;
 }
 h3 {
   color: $primary-orange;
   font-size: 28px;
+  font-weight: normal;
   line-height: 36px;
 }
 h4 {
@@ -64,13 +84,20 @@ h4 {
   line-height: 32px;
 }
 h5 {
-  color: #E3E5F7;
+  color: #e3e5f7;
   font-size: 20px;
   line-height: 28px;
 }
 
+ul {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
 p,
 li {
+  margin-top: 20px;
+  margin-bottom: 20px;
   color: $primary-black;
   font-size: 19px;
   line-height: 31px;
@@ -88,6 +115,32 @@ li {
   list-style-image: url("/src/sc-common/img/common/bullet-main.png");
 }
 
+figure {
+  margin-right: 0;
+  margin-left: 0;
+
+  figcaption {
+    text-align: center;
+  }
+}
+
+/* #region Row */
+
+section {
+  > .row {
+    > div {
+      > *:first-child {
+        margin-top: 0;
+      }
+      > *:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+/* #endregion */
+
 /* #region Header */
 
 header {
@@ -97,7 +150,7 @@ header {
   background-color: $primary-purple;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 
-  &>div {
+  & > div {
     gap: 2rem;
   }
 
@@ -137,3 +190,39 @@ header {
 }
 
 /* #endregion Header */
+
+/* #region Callout */
+
+.callout {
+  padding: 30px;
+  display: flex;
+  gap: 2rem;
+  border-radius: 15px;
+  background-color: $secondary-lighter;
+
+  img {
+    width: 130px;
+    height: 130px;
+  }
+
+  h6 {
+    margin: 0;
+    font-size: 24px;
+    line-height: 32px;
+  }
+  p {
+    margin: 0;
+  }
+}
+
+/* #endregion Callout */
+
+/* #region Popover */
+
+.popover {
+  h3 {
+    margin-top: 0;
+  }
+}
+
+/* #endregion Popover */
