@@ -11,7 +11,7 @@ fetch("sc-common/img/moodleface/moodleface.svg")
       const un = main.querySelector(`#un${i}`);
       un.style.cursor = "pointer";
       un.addEventListener("click", () => {
-        window.open(`/src/un${i}.html`);
+        window.open(`un${i}.html`);
       });
     }
 
@@ -23,7 +23,7 @@ fetch("sc-common/img/moodleface/moodleface.svg")
     const about = main.querySelector("#about");
     about.style.cursor = "pointer";
     main.querySelector("#about").addEventListener("click", () => {
-      window.open("/src/sobre.html");
+      window.open("sobre.html");
     });
 
     const booklet = main.querySelector("#booklet");
