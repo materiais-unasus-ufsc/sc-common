@@ -1,5 +1,5 @@
 function loadComponent(target, componentName) {
-  fetch(`/src/sc-components/components/${componentName}.html`)
+  fetch(`/src/sc-common/components/${componentName}.html`)
     .then((response) => response.text())
     .then((html) => {
       target.innerHTML = html;

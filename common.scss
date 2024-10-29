@@ -85,7 +85,7 @@ a {
 
 /* Override the bullet icon for li elements with an image */
 li {
-  list-style-image: url("/src/sc-components/img/common/bullet-main.png");
+  list-style-image: url("/src/sc-common/img/common/bullet-main.png");
 }
 
 /* #region Header */
@@ -116,7 +116,7 @@ header {
     display: inline-block;
     width: 3rem;
     height: 3rem;
-    background-image: url("/src/sc-components/img/common/icon-hamburger.svg");
+    background-image: url("/src/sc-common/img/common/icon-hamburger.svg");
     background-size: cover;
   }
 }
@@ -124,7 +124,7 @@ header {
 .hero {
   width: 100%;
   height: 400px;
-  background-image: url("/src/sc-components/img/common/hero-bg.svg");
+  background-image: url("/src/sc-common/img/common/hero-bg.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

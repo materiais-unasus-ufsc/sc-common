@@ -1,7 +1,7 @@
 /* Configuração do Moodleface. */
 
 const main = document.querySelector("main");
-fetch("sc-components/img/moodleface/moodleface.svg")
+fetch("sc-common/img/moodleface/moodleface.svg")
   .then((response) => response.text())
   .then((svg) => {
     main.insertAdjacentHTML("afterbegin", svg);
