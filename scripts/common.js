@@ -1,5 +1,5 @@
 function loadComponent(target, componentName) {
-  fetch(`/src/sc-common/components/${componentName}.html`)
+  fetch(`sc-common/components/${componentName}.html`)
     .then((response) => response.text())
     .then((html) => {
       target.innerHTML = html;
@@ -7,7 +7,7 @@ function loadComponent(target, componentName) {
 }
 
 function loadCallout(target, calloutType) {
-  fetch(`/src/sc-common/components/callout-${calloutType}.html`)
+  fetch(`sc-common/components/callout-${calloutType}.html`)
     .then((response) => response.text())
     .then((html) => {
       target.innerHTML = html;
