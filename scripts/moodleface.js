@@ -11,7 +11,7 @@ fetch("sc-common/img/moodleface/moodleface.svg")
       const un = main.querySelector(`#un${i}`);
       un.style.cursor = "pointer";
       un.addEventListener("click", () => {
-        window.open(`un${i}.html`);
+        window.open(`./un${i}.html`);
       });
     }
 
