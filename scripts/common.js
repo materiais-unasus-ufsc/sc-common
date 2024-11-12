@@ -13,7 +13,7 @@ function loadComponent(target, componentName) {
 }
 
 /**
- * @summary Fetches and inserts the component component into the target element.
+ * @summary Fetches and inserts a callout component into the target element.
  */
 function loadCallout(target, calloutType) {
   fetch(`sc-common/components/callout-${calloutType}.html`)
@@ -42,6 +42,10 @@ function loadFigure(module, fileName) {
       let figure = parser
         .parseFromString(figureText, "text/html")
         .querySelector("svg");
+      if (figure == null) {
+        console.error(`Figure ${fileName} is NULL!`);
+        return;
+      }
       figure.classList.add("d-none","d-lg-block");
 
       let container = document.getElementById(fileName);
