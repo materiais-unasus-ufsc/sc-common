@@ -124,6 +124,21 @@ h5 {
   line-height: 1.5rem;
 }
 
+nav {
+  > ul {
+    > li {
+      list-style: none;
+      padding-left: 1rem;
+      &::before {
+        content: url("../sc-common/img/common/bullet-main.png");
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 1rem;
+      }
+    }
+  }
+}
+
 ul {
   margin-top: 20px;
   margin-bottom: 30px;
@@ -149,10 +164,6 @@ a {
   &[role="button"] {
     color: $primary-orange;
   }
-}
-
-li {
-  list-style-image: url("../sc-common/img/common/bullet-main.png");
 }
 
 figure {
@@ -295,14 +306,16 @@ header {
 .popover-body {
   background-color: $primary-orange-lightest;
 
-  >:first-child {
+  > :first-child {
     margin-top: 0;
   }
-  >:last-child {
+  > :last-child {
     margin-bottom: 0;
   }
 
-  p, ul, li {
+  p,
+  ul,
+  li {
     font-size: 0.875rem;
     line-height: 1.5;
     margin-top: 1rem;
