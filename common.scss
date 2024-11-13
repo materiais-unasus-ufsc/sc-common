@@ -178,6 +178,11 @@ figure {
   figcaption {
     line-height: 2rem;
   }
+
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 /* #region Row */
