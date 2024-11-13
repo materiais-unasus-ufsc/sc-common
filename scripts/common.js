@@ -30,7 +30,7 @@ function loadVideos() {
         video.appendChild(
           parser.parseFromString(svgText, "text/html").querySelector("svg")
         );
-
+ 
         // Update cover title with provided value in the title attribute
         const spans = video.querySelector("text").childNodes;
         spans.forEach((span) => (span.innerHTML = ""));
