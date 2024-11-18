@@ -174,6 +174,37 @@ function setUpPopovers() {
   });
 }
 
+function navigate(option) {
+  (mainPageURL = "https://unasus-cp.moodle.ufsc.br/course/view.php?id=416"),
+    (pages = [
+      "sobre.html",
+      // "desafio.html",
+      "un1.html",
+      "un2.html",
+      "un3.html",
+      "un4.html",
+      // "reconhecendo-a-realidade.html",
+      // "questoes-avaliativas.html",
+      // "tomada-de-opiniao.html",
+    ]);
+
+  currentPageURL = window.location.href;
+  lastSlashIndex = currentPageURL.lastIndexOf("/");
+  currentPage = currentPageURL.substring(lastSlashIndex + 1);
+  pos = pages.indexOf(currentPage);
+  offset = "next" === option ? 1 : -1;
+
+  if (pos + offset < 0 || pos + offset >= pages.length) {
+    window.location.href = mainPageURL;
+    return;
+  }
+
+  window.location.href = currentPageURL.replace(
+    currentPage,
+    pages[pos + offset]
+  );
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   loadFigures();
   loadVideos();
