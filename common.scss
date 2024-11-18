@@ -45,18 +45,32 @@ $container-max-widths: (
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playpen+Sans:wght@100..800&display=swap");
 
 $primary-black: #292929;
+
 $primary-blue: #98bcd7;
+$primary-blue-light: #b9d5ea;
+$primary-blue-ligher: #cde3f4;
+$primary-blue-lightest: #b9d5ea;
+$primary-blue-hyperlight: #dcedfa;
+$primary-blue-dark: #7da3bf;
+$primary-blue-darker: #516f85;
+
 $primary-green: #92d3ca;
 $primary-green-lightest: #dcf4f2;
+
 $primary-magenta: #d3a5d0;
 $primary-magenta-lightest: #f8e2f6;
+
 $primary-orange: #f29e4a;
 $primary-orange-lightest: #ffe0c2;
+
 $primary-pink: #ed5e7e;
+
 $primary-purple: #a3a6d6;
 $primary-purple-lightest: #e3e5f7;
+
 $primary-yellow: #fcd861;
 $primary-yellow-lightest: #fef9e7;
+
 $primary-white: white;
 
 $secondary-darker: #434556;
@@ -127,13 +141,9 @@ h5 {
 nav {
   > ul {
     > li {
-      list-style: none;
-      padding-left: 1rem;
       &::before {
-        content: url("../sc-common/img/common/bullet-main.png");
-        display: inline-block;
-        vertical-align: middle;
-        margin-right: 1rem;
+        content: url("../img/common/bullet-nav.svg");
+        vertical-align: -4%;
       }
     }
   }
@@ -142,6 +152,18 @@ nav {
 ul {
   margin-top: 20px;
   margin-bottom: 30px;
+
+  li {
+    list-style-type: none;
+    text-indent: -1rem;
+
+    &::before {
+      content: url("../img/common/bullet-main.svg");
+      display: inline-block;
+      vertical-align: -8%;
+      margin-right: 1rem;
+    }
+  }
 }
 
 p,
@@ -309,7 +331,6 @@ header {
   }
 }
 .popover-body {
-  background-color: $primary-orange-lightest;
 
   > :first-child {
     margin-top: 0;
@@ -333,11 +354,29 @@ header {
   }
 }
 
-.accordion-button {
-  font-weight: bolder;
+/* #endregion Bootstrap components */
+
+.video {
+  width: 100%;
+  border-radius: 1rem;
+  svg {
+    width: 100%;
+  }
 }
 
-/* #endregion Bootstrap components */
+.footer-nav {
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    border: none;
+    background-color: transparent;
+  }
+}
 
 footer {
   height: 80px;
