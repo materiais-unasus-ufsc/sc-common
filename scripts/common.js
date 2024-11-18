@@ -27,30 +27,37 @@ function loadVideos() {
       .then((response) => response.text())
       .then((svgText) => {
         const parser = new DOMParser();
-        video.appendChild(
-          parser.parseFromString(svgText, "text/html").querySelector("svg")
-        );
- 
+        const svg = parser
+          .parseFromString(svgText, "text/html")
+          .querySelector("svg");
+
         // Update cover title with provided value in the title attribute
-        const spans = video.querySelector("text").childNodes;
+        const spans = svg.querySelector("text").childNodes;
         spans.forEach((span) => (span.innerHTML = ""));
-        const titleWords = video.getAttribute("title").split(" ");
-        const quocient = Math.ceil(titleWords.length / 4);
-        for (let i = 0; i < titleWords.length; i++) {
-          console.log(titleWords);
-          spans[Math.floor(i / quocient)].innerHTML += `${titleWords[i]} `;
+
+        const title = video.getAttribute("title");
+        const words = title.split(" ");
+        const quocient = Math.ceil(
+          words.reduce((sum, str) => sum + str.length, 0) / 4
+        );
+        let count = 0;
+        for (let i = 0; i < words.length; i++) {
+          // console.log(titleWords);
+          spans[Math.floor(count / quocient)].innerHTML += `${words[i]} `;
+          count += words[i].length;
         }
 
         // Add video replacement logic on click over the video container
-        const container = video.querySelector("#video-cover-container");
+        const container = svg.querySelector("#video-cover-container");
         container.style.cursor = "pointer";
+
         const iframe = document.createElement("iframe");
         const att = {
-          width: window.getComputedStyle(container.querySelector("rect")).width,
-          height: window.getComputedStyle(container.querySelector("rect"))
-            .height,
+          width: "100%",
+          height: container.querySelector("rect").getAttribute("height"),
           src: video.getAttribute("src"),
           title: video.getAttribute("title"),
+          frameborder: 0,
           allow:
             "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
           referrerpolicy: "strict-origin-when-cross-origin",
@@ -59,8 +66,20 @@ function loadVideos() {
         for (const [key, value] of Object.entries(att)) {
           iframe.setAttribute(key, value);
         }
+
+        iframe.style.margin = "50px 0";
+        iframe.style.display = "none";
+        video.appendChild(iframe);
+        video.appendChild(svg);
+
         container.addEventListener("click", () => {
-          container.replaceChildren(iframe);
+          hideElement(svg);
+          showElement(iframe);
+          video.style.backgroundImage =
+            "url(sc-common/img/common/video-cover-bg.png)";
+          video.style.backgroundSize = "cover";
+          video.style.backgroundPosition = "center";
+          video.style.backgroundRepeat = "no-repeat";
         });
       });
   });
