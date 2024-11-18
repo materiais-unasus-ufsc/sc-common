@@ -1,13 +1,13 @@
 /* Configuração do Moodleface. */
 
 const main = document.querySelector("main");
-fetch("sc-common/img/moodleface/moodleface.svg")
+fetch("img/moodleface/moodleface.svg")
   .then((response) => response.text())
   .then((svg) => {
     main.insertAdjacentHTML("afterbegin", svg);
   })
   .then(() => {
-    for (let i = 1; i <= 3; i++) {
+    for (let i = 1; i <= 4; i++) {
       const un = main.querySelector(`#un${i}`);
       un.style.cursor = "pointer";
       un.addEventListener("click", () => {
@@ -15,8 +15,8 @@ fetch("sc-common/img/moodleface/moodleface.svg")
       });
     }
 
-    for (let i = 1; i <= 3; i++) {
-      const questions = main.querySelector(`#questions-${i}`);
+    for (let i = 1; i <= 4; i++) {
+      const questions = main.querySelector(`#q${i}`);
       questions.style.cursor = "pointer";
     }
 
