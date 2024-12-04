@@ -103,7 +103,6 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Playpen Sans", sans-serif;
   text-align: left;
   hyphens: none;
   margin-top: 2rem;
@@ -116,23 +115,24 @@ h1 {
   font-weight: bold;
 }
 h2 {
-  font-size: 2.25rem;
-  line-height: 2.75rem;
-  color: $primary-purple;
+  font-size: 2rem;
+  line-height: 2.5rem;
+  color: $secondary-darker;
   font-weight: bold;
 }
 h3 {
-  font-size: 2rem;
-  line-height: 2.5rem;
-  color: $primary-green;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  color: $secondary-dark;
   font-weight: bold;
 }
 h4 {
-  font-size: 1.75rem;
-  line-height: 2.25rem;
-  color: $primary-orange;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  color: $secondary-normal;
 }
 h5 {
+  font-family: "Playpen Sans", sans-serif;
   color: #e3e5f7;
   font-size: 1.2rem;
   line-height: 1.5rem;
@@ -246,6 +246,15 @@ header {
   h5 {
     margin: 1rem 0;
     max-width: 400px;
+    color: $primary-white;
+  }
+
+  span.un-tag {
+    font-family: "Playpen Sans", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $primary-white;
+    margin-right: 1.5rem;
   }
 
   button {
@@ -374,6 +383,7 @@ header {
   border-radius: 1rem;
   svg {
     width: 100%;
+    height: auto !important;
   }
 }
 
