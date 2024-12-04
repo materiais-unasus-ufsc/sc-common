@@ -12,11 +12,34 @@ function loadComponent(target, componentName) {
     });
 }
 
+function loadHeader(target) {
+  fetch(`sc-common/components/header.html`)
+    .then((response) => response.text())
+    .then((headerStr) => {
+      const parser = new DOMParser();
+      const headerElement = parser
+        .parseFromString(headerStr, "text/html")
+        .querySelector(".container");
+      headerElement.querySelector(".un-tag").textContent =
+        target.getAttribute("un-tag");
+
+      target.appendChild(headerElement);
+    });
+}
+
 function loadComponents() {
   const components = document.querySelectorAll(".component");
   components.forEach((component) => {
     const componentName = component.getAttribute("name");
-    loadComponent(component, componentName);
+    switch (componentName) {
+      case "header":
+        loadHeader(component);
+        break;
+
+      default:
+        loadComponent(component, componentName);
+        break;
+    }
   });
 }
 
@@ -54,7 +77,7 @@ function loadVideos() {
         const iframe = document.createElement("iframe");
         const att = {
           width: "100%",
-          height: container.querySelector("rect").getAttribute("height"),
+          height: "255px",
           src: video.getAttribute("src"),
           title: video.getAttribute("title"),
           frameborder: 0,
@@ -67,7 +90,7 @@ function loadVideos() {
           iframe.setAttribute(key, value);
         }
 
-        iframe.style.margin = "50px 0";
+        iframe.style.margin = "20px 0";
         iframe.style.display = "none";
         video.appendChild(iframe);
         video.appendChild(svg);
