@@ -162,6 +162,8 @@ function loadFigures() {
   document.querySelectorAll("figure").forEach((element) => {
     loadFigure(module, element.id);
   });
+  const event = new CustomEvent('SVGsLoaded');
+  document.dispatchEvent(event);
 }
 
 function hideElement(element) {
