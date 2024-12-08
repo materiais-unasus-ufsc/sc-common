@@ -1,8 +1,15 @@
 <nav class="footer-nav container">
-  <a onclick="navigate('back')" role="button">
+  <a role="button">
     <img src="sc-common/img/common/button-back.svg" alt="Voltar">
   </a>
-  <a onclick="navigate('next')" role="button">
+  <a role="button">
     <img src="sc-common/img/common/button-for.svg" alt="Avançar">
   </a>
 </nav>
+<script type="module">
+  import { navigate } from './js/main.js';
+
+  const buttons = document.querySelectorAll('nav.footer-nav a');
+  buttons[0].addEventListener('click', () => {navigate('back')});
+  buttons[1].addEventListener('click', () => {navigate('next')});
+</script>

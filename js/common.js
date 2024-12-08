@@ -3,18 +3,32 @@
  * @module common
  */
 
-import * as helper from './helper.js';
+import * as helper from "./helper.js";
 
 /**
  * Loads a static component into the target element.
- * @param {*} target
- * @param {*} componentName
+ * @param {HTMLElement} target
+ * @param {string} componentName
  */
-export function loadComponent(target, componentName) {
-  fetch(`sc-common/components/${componentName}.html`)
+export async function loadComponent(target, componentName) {
+  return fetch(`sc-common/components/${componentName}.html`)
     .then((response) => response.text())
     .then((html) => {
-      target.innerHTML = html;
+      const parser = new DOMParser();
+      const componentBody = parser.parseFromString(html, "text/html").body;
+      console.log(componentBody);
+
+      const scripts = componentBody.querySelectorAll("script");
+      scripts.forEach((script) => {
+        const newScript = document.createElement("script");
+        newScript.textContent = script.textContent;
+        newScript.setAttribute("type", "module");
+        document.body.appendChild(newScript);
+        script.remove();
+      });
+
+      target.innerHTML = "";
+      target.appendChild(componentBody);
     });
 }
 
@@ -34,6 +48,7 @@ export function loadHeader(target) {
 }
 
 export function loadComponents() {
+  let promises = [];
   const components = document.querySelectorAll(".component");
   components.forEach((component) => {
     const componentName = component.getAttribute("name");
@@ -43,14 +58,20 @@ export function loadComponents() {
         break;
 
       default:
-        loadComponent(component, componentName);
+        promises.push(loadComponent(component, componentName));
         break;
     }
+  });
+
+  Promise.allSettled(promises).then(() => {
+    const event = new CustomEvent("ComponentsLoaded");
+    document.dispatchEvent(event);
+    console.log("All components loaded");
   });
 }
 
 export function loadVideos() {
-  const module = document.querySelector('main').id.slice(-1);
+  const module = document.querySelector("main").id.slice(-1);
   const videos = document.querySelectorAll(".video");
   videos.forEach((video) => {
     fetch(`img/common/video-cover-${module}.svg`)
@@ -72,7 +93,6 @@ export function loadVideos() {
         );
         let count = 0;
         for (let i = 0; i < words.length; i++) {
-          // console.log(titleWords);
           spans[Math.floor(count / quocient)].innerHTML += `${words[i]} `;
           count += words[i].length;
         }
@@ -105,8 +125,7 @@ export function loadVideos() {
         container.addEventListener("click", () => {
           helper.hideElement(svg);
           helper.showElement(iframe);
-          video.style.backgroundImage =
-            "url(img/common/video-cover-bg.png)";
+          video.style.backgroundImage = "url(img/common/video-cover-bg.png)";
           video.style.backgroundSize = "cover";
           video.style.backgroundPosition = "center";
           video.style.backgroundRepeat = "no-repeat";
@@ -140,7 +159,6 @@ export function loadCallouts() {
   });
 }
 
-
 export function loadFigures() {
   const module = document.querySelector("main").id;
   let promises = [];
@@ -151,7 +169,7 @@ export function loadFigures() {
   Promise.allSettled(promises).then(() => {
     const event = new CustomEvent("SVGsLoaded");
     document.dispatchEvent(event);
-    console.log("-- Finished loading SVGs --");
+    console.log("All SVG figures loaded");
   });
 }
 
@@ -188,33 +206,35 @@ export function setUpPopovers() {
 }
 
 export function navigate(option) {
-  (mainPageURL = "https://unasus-cp.moodle.ufsc.br/course/view.php?id=416"),
-    (pages = [
-      "sobre.html",
-      // "desafio.html",
-      "un1.html",
-      "un2.html",
-      "un3.html",
-      "un4.html",
-      // "reconhecendo-a-realidade.html",
-      // "questoes-avaliativas.html",
-      // "tomada-de-opiniao.html",
-    ]);
+  const mainPageURL = "https://unasus-cp.moodle.ufsc.br/course/view.php?id=416";
+  const pages = [
+    "sobre.html",
+    // "desafio.html",
+    "un1.html",
+    "un2.html",
+    "un3.html",
+    "un4.html",
+    // "reconhecendo-a-realidade.html",
+    // "questoes-avaliativas.html",
+    // "tomada-de-opiniao.html",
+  ];
 
-  currentPageURL = window.location.href;
-  lastSlashIndex = currentPageURL.lastIndexOf("/");
-  currentPage = currentPageURL.substring(lastSlashIndex + 1);
-  pos = pages.indexOf(currentPage);
-  offset = "next" === option ? 1 : -1;
+  const currentPageURL = window.location.href;
+  const currentPage = currentPageURL.substring(
+    currentPageURL.lastIndexOf("/") + 1
+  );
+  const currentPageIndex = pages.indexOf(currentPage);
+  const offset = option === "next" ? 1 : -1;
 
-  if (pos + offset < 0 || pos + offset >= pages.length) {
+  if (
+    currentPageIndex === -1 ||
+    currentPageIndex + offset < 0 ||
+    currentPageIndex + offset >= pages.length
+  ) {
     window.location.href = mainPageURL;
     return;
   }
 
-  window.location.href = currentPageURL.replace(
-    currentPage,
-    pages[pos + offset]
-  );
+  const nextPage = pages[currentPageIndex + offset];
+  window.location.href = currentPageURL.replace(currentPage, nextPage);
 }
-
