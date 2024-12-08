@@ -50,9 +50,10 @@ export function loadComponents() {
 }
 
 export function loadVideos() {
+  const module = document.querySelector('main').id.slice(-1);
   const videos = document.querySelectorAll(".video");
   videos.forEach((video) => {
-    fetch("sc-common/img/common/video-cover.svg")
+    fetch(`img/common/video-cover-${module}.svg`)
       .then((response) => response.text())
       .then((svgText) => {
         const parser = new DOMParser();
@@ -105,7 +106,7 @@ export function loadVideos() {
           helper.hideElement(svg);
           helper.showElement(iframe);
           video.style.backgroundImage =
-            "url(sc-common/img/common/video-cover-bg.png)";
+            "url(img/common/video-cover-bg.png)";
           video.style.backgroundSize = "cover";
           video.style.backgroundPosition = "center";
           video.style.backgroundRepeat = "no-repeat";
