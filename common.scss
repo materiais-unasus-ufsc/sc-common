@@ -39,38 +39,62 @@ $container-max-widths: (
 @import "../../node_modules/bootstrap/scss/popover.scss";
 @import "../../node_modules/bootstrap/scss/transitions.scss";
 @import "../../node_modules/bootstrap/scss/accordion.scss";
+@import "../../node_modules/bootstrap/scss/modal.scss";
 
 // @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playpen+Sans:wght@100..800&display=swap");
 
-$primary-black: #292929;
-
+$primary-blue-darker: #516f85;
+$primary-blue-dark: #7da3bf;
 $primary-blue: #98bcd7;
 $primary-blue-light: #b9d5ea;
 $primary-blue-ligher: #cde3f4;
-$primary-blue-lightest: #b9d5ea;
-$primary-blue-hyperlight: #dcedfa;
-$primary-blue-dark: #7da3bf;
-$primary-blue-darker: #516f85;
+$primary-blue-lightest: #dcedfa;
 
+$primary-green-darker: #57857f;
+$primary-green-dark: #83beb7;
 $primary-green: #92d3ca;
+$primary-green-light: #afe2db;
+$primary-green-lighter: #cdefeb;
 $primary-green-lightest: #dcf4f2;
 
+$primary-magenta-darker: #824f7e;
+$primary-magenta-dark: #b384b0;
 $primary-magenta: #d3a5d0;
+$primary-magenta-light: #e2bbdf;
+$primary-magenta-lighter: #f1d5ef;
 $primary-magenta-lightest: #f8e2f6;
 
+$primary-orange-darker: #a86624;
+$primary-orange-dark: #d78737;
 $primary-orange: #f29e4a;
+$primary-orange-light: #f9b97a;
+$primary-orange-lighter: #fdd4aa;
 $primary-orange-lightest: #ffe0c2;
 
+$primary-pink-darker: #91273e;
+$primary-pink-dark: #d14766;
 $primary-pink: #ed5e7e;
+$primary-pink-light: #ff7d9a;
+$primary-pink-ligher: #ff9eb6;
+$primary-pink-lighest: #ffccd7;
 
+$primary-purple-darker: #5a5d8c;
+$primary-purple-dark: #868abb;
 $primary-purple: #a3a6d6;
+$primary-purple-light: #bdbfe1;
+$primary-purple-lighter: #d2d4ef;
 $primary-purple-lightest: #e3e5f7;
 
+$primary-yellow-darker: #bc971a;
+$primary-yellow-dark: #f0c638;
 $primary-yellow: #fcd861;
-$primary-yellow-lightest: #fef9e7;
+$primary-yellow-light: #ffe58f;
+$primary-yellow-lighter: #ffecad;
+$primary-yellow-lightest: #fff1c2;
 
+$primary-black: #292929;
 $primary-white: white;
 
 $secondary-darker: #434556;
@@ -332,7 +356,7 @@ header {
   }
   li {
     &::before {
-      content: '•';
+      content: "•";
       font-size: 2rem;
       vertical-align: -15%;
       margin-right: 0.5rem;
@@ -351,7 +375,6 @@ header {
   }
 }
 .popover-body {
-
   > :first-child {
     margin-top: 0;
   }
@@ -371,7 +394,7 @@ header {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     &::before {
-      content: '•';
+      content: "•";
     }
   }
 }
