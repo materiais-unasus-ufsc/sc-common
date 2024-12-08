@@ -1,10 +1,16 @@
 /**
- * @summary Loads a static component into the target element.
- *
+ * A module for setup functions common across courses.
+ * @module common
+ */
+
+import * as helper from './helper.js';
+
+/**
+ * Loads a static component into the target element.
  * @param {*} target
  * @param {*} componentName
  */
-function loadComponent(target, componentName) {
+export function loadComponent(target, componentName) {
   fetch(`sc-common/components/${componentName}.html`)
     .then((response) => response.text())
     .then((html) => {
@@ -12,7 +18,7 @@ function loadComponent(target, componentName) {
     });
 }
 
-function loadHeader(target) {
+export function loadHeader(target) {
   fetch(`sc-common/components/header.html`)
     .then((response) => response.text())
     .then((headerStr) => {
@@ -27,7 +33,7 @@ function loadHeader(target) {
     });
 }
 
-function loadComponents() {
+export function loadComponents() {
   const components = document.querySelectorAll(".component");
   components.forEach((component) => {
     const componentName = component.getAttribute("name");
@@ -43,7 +49,7 @@ function loadComponents() {
   });
 }
 
-function loadVideos() {
+export function loadVideos() {
   const videos = document.querySelectorAll(".video");
   videos.forEach((video) => {
     fetch("sc-common/img/common/video-cover.svg")
@@ -96,8 +102,8 @@ function loadVideos() {
         video.appendChild(svg);
 
         container.addEventListener("click", () => {
-          hideElement(svg);
-          showElement(iframe);
+          helper.hideElement(svg);
+          helper.showElement(iframe);
           video.style.backgroundImage =
             "url(sc-common/img/common/video-cover-bg.png)";
           video.style.backgroundSize = "cover";
@@ -111,7 +117,7 @@ function loadVideos() {
 /**
  * @summary Fetches and inserts a callout component into the target element.
  */
-function loadCallout(target, calloutType) {
+export function loadCallout(target, calloutType) {
   fetch(`sc-common/components/callout-${calloutType}.html`)
     .then((response) => response.text())
     .then((html) => {
@@ -125,7 +131,7 @@ function loadCallout(target, calloutType) {
     });
 }
 
-function loadCallouts() {
+export function loadCallouts() {
   const callouts = document.querySelectorAll(".callout");
   callouts.forEach((callout) => {
     const calloutType = callout.getAttribute("type");
@@ -133,63 +139,25 @@ function loadCallouts() {
   });
 }
 
-function loadFigure(module, fileName) {
-  if (fileName == "") {
-    console.error("Tried to load a figure with no name!");
-    return;
-  }
 
-  fetch(`img/${module}/${fileName}.svg`)
-    .then((response) => response.text())
-    .then((figureText) => {
-      const parser = new DOMParser();
-      let figure = parser
-        .parseFromString(figureText, "text/html")
-        .querySelector("svg");
-      if (figure == null) {
-        console.error(`Figure ${fileName} is NULL!`);
-        return;
-      }
-      figure.classList.add("d-none", "d-lg-block");
-
-      let container = document.getElementById(fileName);
-      container.insertAdjacentElement("afterbegin", figure);
-    });
-}
-
-function loadFigures() {
+export function loadFigures() {
   const module = document.querySelector("main").id;
+  let promises = [];
   document.querySelectorAll("figure").forEach((element) => {
-    loadFigure(module, element.id);
+    promises.push(helper.loadFigure(module, element.id));
   });
-  const event = new CustomEvent('SVGsLoaded');
-  document.dispatchEvent(event);
-}
 
-function hideElement(element) {
-  if (!element.hasAttribute("originalDisplay")) {
-    element.setAttribute("originalDisplay", element.style.display);
-  }
-  element.style.display = "none";
-}
-
-function showElement(element) {
-  element.style.display = element.getAttribute("originalDisplay");
-}
-
-function toggleVisibility(targetSelector) {
-  let target = document.querySelector(targetSelector);
-  if (target.style.display == "none") {
-    showElement(target);
-  } else {
-    hideElement(target);
-  }
+  Promise.allSettled(promises).then(() => {
+    const event = new CustomEvent("SVGsLoaded");
+    document.dispatchEvent(event);
+    console.log("-- Finished loading SVGs --");
+  });
 }
 
 /**
  * @brief Setup for Bootstrap popover components.
  */
-function setUpPopovers() {
+export function setUpPopovers() {
   const popoverTriggerList = document.querySelectorAll(
     '[data-bs-toggle="popover"]'
   );
@@ -218,7 +186,7 @@ function setUpPopovers() {
   });
 }
 
-function navigate(option) {
+export function navigate(option) {
   (mainPageURL = "https://unasus-cp.moodle.ufsc.br/course/view.php?id=416"),
     (pages = [
       "sobre.html",
@@ -249,10 +217,3 @@ function navigate(option) {
   );
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  loadFigures();
-  loadVideos();
-  loadComponents();
-  loadCallouts();
-  setUpPopovers();
-});
