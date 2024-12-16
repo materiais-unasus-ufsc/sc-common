@@ -69,3 +69,36 @@ export function toggleVisibility(targetSelector) {
     hideElement(target);
   }
 }
+
+export function showSelector(selector) {
+  const element = document.querySelector(selector);
+  if (element) {
+    showElement(element);
+  } else {
+    console.error(`showSelector function could not query ${selector}`);
+  }
+}
+
+export function hideSelector(selector) {
+  const element = document.querySelector(selector);
+  if (element) {
+    hideElement(element);
+  } else {
+    console.error(`hideSelector function could not query ${selector}`);
+  }
+}
+
+export function toggleVisibilitySelector(selector) {
+  const element = document.querySelector(selector);
+  if (element) {
+    if (element.style.display == "none") {
+      showElement(element);
+    } else {
+      hideElement(element);
+    }
+  } else {
+    console.error(
+      `toggleVisibilitySelector function could not query ${selector}`
+    );
+  }
+}
