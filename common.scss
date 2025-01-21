@@ -1,4 +1,9 @@
-/* Estilos comuns entre todos os módulos do curso Saúde da Criança. */
+/**
+  * Estilos comuns entre todos os módulos
+  * do curso Saúde da Criança.
+*/
+
+/* --- IMPORTS --- */
 
 // 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
 @import "../../node_modules/bootstrap/scss/functions";
@@ -38,78 +43,71 @@ $container-max-widths: (
 @import "../../node_modules/bootstrap/scss/bootstrap-grid.scss";
 @import "../../node_modules/bootstrap/scss/popover.scss";
 @import "../../node_modules/bootstrap/scss/transitions.scss";
+
+$accordion-button-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='#{$accordion-icon-color}' class='bi bi-caret-down-fill' viewBox='0 0 16 16'> <path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>");
+$accordion-button-active-icon: $accordion-button-icon;
 @import "../../node_modules/bootstrap/scss/accordion.scss";
+
 @import "../../node_modules/bootstrap/scss/modal.scss";
 
 // @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playpen+Sans:wght@100..800&display=swap");
 
-$primary-blue-darker: #516f85;
-$primary-blue-dark: #7da3bf;
-$primary-blue: #98bcd7;
-$primary-blue-light: #b9d5ea;
-$primary-blue-ligher: #cde3f4;
-$primary-blue-lightest: #dcedfa;
+/* --- VARIABLES --- */
 
-$primary-green-darker: #57857f;
-$primary-green-dark: #83beb7;
-$primary-green: #92d3ca;
-$primary-green-light: #afe2db;
-$primary-green-lighter: #cdefeb;
-$primary-green-lightest: #dcf4f2;
+$color-blue-bell-50: #f6f6fc;
+$color-blue-bell-200: #e2e2f2;
+$color-blue-bell-300: #cacae8;
+$color-blue-bell-400: #aeabda;
+$color-blue-bell-500: #938ccb;
+$color-blue-bell-600: #7b6eb9;
+$color-blue-bell-900: #4a4072;
+$color-blue-bell-950: #2e294c;
 
-$primary-magenta-darker: #824f7e;
-$primary-magenta-dark: #b384b0;
-$primary-magenta: #d3a5d0;
-$primary-magenta-light: #e2bbdf;
-$primary-magenta-lighter: #f1d5ef;
-$primary-magenta-lightest: #f8e2f6;
+$color-shadow-green-50: #f4f9f8;
+$color-shadow-green-100: #daede9;
+$color-shadow-green-200: #b5dad4;
+$color-shadow-green-300: #93c6bf;
+$color-shadow-green-400: #5fa29b;
+$color-shadow-green-500: #458781;
 
-$primary-orange-darker: #a86624;
-$primary-orange-dark: #d78737;
-$primary-orange: #f29e4a;
-$primary-orange-light: #f9b97a;
-$primary-orange-lighter: #fdd4aa;
-$primary-orange-lightest: #ffe0c2;
+$color-light-orchid-200: #f2d8ef;
 
-$primary-pink-darker: #91273e;
-$primary-pink-dark: #d14766;
-$primary-pink: #ed5e7e;
-$primary-pink-light: #ff7d9a;
-$primary-pink-ligher: #ff9eb6;
-$primary-pink-lighest: #ffccd7;
+$color-tonys-pink-200: #f5d8d3;
 
-$primary-purple-darker: #5a5d8c;
-$primary-purple-dark: #868abb;
-$primary-purple: #a3a6d6;
-$primary-purple-light: #bdbfe1;
-$primary-purple-lighter: #d2d4ef;
-$primary-purple-lightest: #e3e5f7;
+$color-new-orleans-200: #efdeb9;
 
-$primary-yellow-darker: #bc971a;
-$primary-yellow-dark: #f0c638;
-$primary-yellow: #fcd861;
-$primary-yellow-light: #ffe58f;
-$primary-yellow-lighter: #ffecad;
-$primary-yellow-lightest: #fff1c2;
+$color-neutral-black: #292929;
+$color-neutral-daker: #434556;
+$color-neutral-dark: #70728f;
+$color-neutral-normal: #a9abbc;
+$color-neutral-light: #d4d5dd;
+$color-neutral-lighter: #f1f1f4;
+$color-neutral-white: #ffffff;
 
-$primary-black: #292929;
-$primary-white: white;
+$font-open-sans: "Open Sans";
+$font-playpen-sans: "Playpen Sans";
 
-$secondary-darker: #434556;
-$secondary-dark: #70728f;
-$secondary-normal: #a9abbc;
-$secondary-light: #d4d5dd;
-$secondary-lighter: #f1f1f4;
+$list-bullet-nav-1: url("../img/common/bullet-nav.svg");
+$list-bullet-content-1: url("../img/common/bullet-main.svg");
+$list-bullet-callout-light: url("../img/common/bullet-callout-light.svg");
 
+/* --- GENERAL --- */
 * {
   box-sizing: border-box;
+  scroll-margin-top: 120px;
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
-  font-family: "Open Sans", sans-serif;
+
+  color: $color-neutral-black;
+  font-size: 1.125rem;
+  line-height: 1.4;
+  font-family: $font-open-sans, sans-serif;
   text-align: justify;
   hyphens: auto;
 }
@@ -121,6 +119,8 @@ section {
   }
 }
 
+/* --- TITLES --- */
+
 h1,
 h2,
 h3,
@@ -131,43 +131,45 @@ h6 {
   hyphens: none;
   margin-top: 2rem;
   margin-bottom: 1.5rem;
+  line-height: 1.4;
 }
 h1 {
-  font-size: 2.25rem;
-  line-height: 2.75rem;
-  color: $primary-purple;
-  font-weight: bold;
+  margin: 0;
+  font-size: 2.5rem;
+  color: $color-blue-bell-900;
 }
 h2 {
   font-size: 2rem;
-  line-height: 2.5rem;
-  color: $secondary-darker;
+  color: $color-neutral-daker;
   font-weight: bold;
 }
 h3 {
   font-size: 1.5rem;
-  line-height: 2rem;
-  color: $secondary-dark;
+  color: $color-neutral-dark;
   font-weight: bold;
 }
 h4 {
   font-size: 1.25rem;
-  line-height: 1.75rem;
-  color: $secondary-normal;
+  color: $color-neutral-normal;
 }
 h5 {
-  font-family: "Playpen Sans", sans-serif;
-  color: #e3e5f7;
   font-size: 1.2rem;
-  line-height: 1.5rem;
 }
+
+/* --- LISTS --- */
 
 nav {
   > ul {
     > li {
+      font-weight: 600;
+
       &::before {
-        content: url("../img/common/bullet-nav.svg");
+        content: $list-bullet-nav-1;
         vertical-align: -4%;
+      }
+
+      > a {
+        color: $color-blue-bell-900;
       }
     }
   }
@@ -178,14 +180,15 @@ ul {
   margin-bottom: 30px;
 
   li {
+    margin: 1rem 0;
     list-style-type: none;
     text-indent: -1rem;
 
     &::before {
-      content: url("../img/common/bullet-main.svg");
+      content: $list-bullet-content-1;
       display: inline-block;
       vertical-align: -8%;
-      margin-right: 1rem;
+      margin-right: 0.5rem;
     }
 
     &:first-child {
@@ -197,25 +200,45 @@ ul {
   }
 }
 
-p,
-li {
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-  color: $primary-black;
-  font-size: 1.125rem;
-  line-height: 1.625rem;
+ul.icon-list {
+  padding-inline-start: 0;
+  > li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    list-style: none;
+    text-indent: 0;
+    &::before {
+      content: none;
+    }
+
+    img {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
 }
 
+.callout {
+  li {
+    &::before {
+      content: $list-bullet-callout-light;
+    }
+  }
+}
+
+/* --- TEXT --- */
+
 a {
-  color: $primary-orange;
   text-decoration: none;
   font-style: italic;
   font-weight: 600;
   cursor: pointer;
-  color: $primary-pink;
+  color: $color-blue-bell-600;
 
   &[role="button"] {
-    color: $primary-orange;
+    text-decoration: underline;
   }
 }
 
@@ -223,12 +246,12 @@ blockquote {
   margin-left: 1rem;
   margin-right: 2rem;
   padding-left: 1rem;
-  border-left: 2px solid $secondary-dark;
+  border-left: 2px solid $color-neutral-dark;
 
   font-size: 1.125rem;
   line-height: 1.625rem;
   font-style: italic;
-  color: $secondary-darker;
+  color: $color-neutral-daker;
 }
 
 figure {
@@ -241,8 +264,9 @@ figure {
   text-align: center;
 
   figcaption {
+    font-weight: 600;
     font-size: 0.9rem;
-    margin: 0.5rem 0;
+    margin-top: 1rem;
   }
 
   svg {
@@ -253,10 +277,8 @@ figure {
 
 pre {
   white-space: pre-line;
-  color: $primary-purple;
+  color: $color-blue-bell-900;
 }
-
-/* #region Row */
 
 section {
   > .row {
@@ -271,16 +293,14 @@ section {
   }
 }
 
-/* #endregion */
-
-/* #region Header */
+/* --- HEADER --- */
 
 header {
   width: 100%;
   position: fixed;
   top: 0;
   z-index: 10000;
-  background-color: $primary-purple;
+  background-color: $color-blue-bell-500;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 
   & > div {
@@ -290,14 +310,13 @@ header {
   h5 {
     margin: 1rem 0;
     max-width: 400px;
-    color: $primary-white;
+    color: $color-neutral-white;
   }
 
   span.un-tag {
-    font-family: "Playpen Sans", sans-serif;
     font-size: 1.5rem;
     font-weight: 700;
-    color: $primary-white;
+    color: $color-neutral-white;
     margin-right: 1.5rem;
   }
 
@@ -317,109 +336,154 @@ header {
 }
 
 .hero {
+  display: flex;
+  align-items: end;
+
   width: 100%;
-  height: 400px;
+  min-height: 400px;
   background-image: url("../sc-common/img/common/hero-bg.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
-  img {
-    margin-bottom: 40px;
-    width: 100%;
-    height: auto;
+  .title {
+    margin: 10rem 0 4rem;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background-color: $color-shadow-green-200;
+
+    > .row > :first-child {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      > img {
+        max-width: 120px;
+        width: 100%;
+        height: auto;
+      }
+    }
   }
 }
 
-/* #endregion Header */
-
-/* #region Callout */
+/* --- CALLOUTS --- */
 
 .callout {
-  margin-top: 2rem;
+  margin-top: 5rem;
   margin-bottom: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 935px;
   padding: 1.5rem;
+
   display: flex;
-  gap: 1.5rem;
+  flex-direction: column;
   border-radius: 1rem;
+
+  color: $color-blue-bell-950;
+  font-weight: 500;
 
   @media (max-width: map-get($grid-breakpoints, "sm")) {
     flex-wrap: wrap;
   }
   &[type="info"] {
-    background-color: $primary-purple-lightest;
+    background-color: $color-blue-bell-200;
   }
   &[type="reflection"] {
-    background-color: $primary-green-lightest;
+    background-color: $color-blue-bell-600;
+    color: $color-blue-bell-50;
   }
   &[type="warning"] {
-    background-color: $primary-yellow-lightest;
+    background-color: $color-blue-bell-200;
+    h6 {
+      color: $color-blue-bell-950;
+    }
   }
   &[type="glossary"] {
-    background-color: $primary-magenta-lightest;
+    background-color: $color-blue-bell-900;
+    color: $color-blue-bell-50;
+
+    a {
+      color: $color-blue-bell-200;
+    }
   }
 
-  img {
+  > img {
+    margin: -96px auto 0;
     width: 130px;
     height: 130px;
   }
 
-  h6 {
-    margin: 0;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-    line-height: 2rem;
+  .callout-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -2rem;
+    margin-bottom: 1.5rem;
+
+    > h6 {
+      margin: 0;
+      font-family: $font-playpen-sans, sans-serif;
+      font-size: 1.5rem;
+    }
+
+    > button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: calc(1.5rem + 4px);
+      height: calc(1.5rem + 4px);
+      padding: 0;
+      border: none;
+      border-radius: 100%;
+      background-color: $color-blue-bell-500;
+      transition: all ease 0.1s;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $color-blue-bell-600;
+      }
+
+      > i {
+        /* display: inline-block; */
+        text-align: center;
+        font-size: 1.5rem;
+        -webkit-text-stroke: 1px;
+        color: $color-neutral-white;
+      }
+    }
+
+    // Responsiveness
+    @include media-breakpoint-down(lg) {
+      margin-top: 0;
+    }
   }
-  p {
-    margin: 0;
-    min-width: 200px;
-  }
-  li {
-    &::before {
-      content: "•";
-      font-size: 2rem;
-      vertical-align: -15%;
-      margin-right: 0.5rem;
-      margin-left: 0.5rem;
+
+  > .callout-body {
+    > :first-child {
+      margin-top: 0;
+    }
+    > :last-child {
+      margin-bottom: 0;
     }
   }
 }
 
-/* #endregion Callout */
+/* --- BOOTSTRAP CUSTOMIZATION --- */
 
-/* #region Bootstrap components */
-
-.popover {
-  h3 {
-    margin-top: 0;
-  }
-}
-.popover-body {
-  > :first-child {
-    margin-top: 0;
-  }
-  > :last-child {
-    margin-bottom: 0;
-  }
-
-  p,
-  ul,
-  li {
-    font-size: 0.875rem;
-    line-height: 1.5;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-  li {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    &::before {
-      content: "•";
+.accordion {
+  .accordion-body {
+    > :first-child {
+      margin-top: 0;
+    }
+    > :last-child {
+      margin-bottom: 0;
     }
   }
 }
 
-/* #endregion Bootstrap components */
+/* --- VIDEO --- */
 
 .video {
   width: 100%;
@@ -439,12 +503,48 @@ header {
   align-items: center;
 
   a {
-    border: none;
-    background-color: transparent;
+    width: 163px;
+    padding: 4px 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    font-size: 1.25rem;
+    font-style: normal;
+    text-decoration: none;
+    border-radius: 0.75rem;
+    border: solid 2px $color-blue-bell-600;
+
+    transition: all ease-in-out 100ms;
+
+    i {
+      font-size: 1.75rem;
+      font-weight: bold;
+    }
+
+    &:first-child {
+      background-color: transparent;
+
+      &:hover {
+        background-color: $color-blue-bell-200;
+      }
+    }
+
+    &:last-child {
+      color: $color-neutral-white;
+      background-color: $color-blue-bell-600;
+
+      &:hover {
+        border-color: $color-blue-bell-900;
+        background-color: $color-blue-bell-900;
+      }
+    }
   }
 }
 
 footer {
   height: 80px;
-  background-color: $primary-purple;
+  background-color: $color-blue-bell-600;
 }
