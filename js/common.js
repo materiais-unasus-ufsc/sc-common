@@ -32,7 +32,7 @@ export async function loadComponent(target, componentName) {
     });
 }
 
-export function loadHeader(target) {
+export function loadHeader(target, uTag) {
   fetch(`sc-common/components/header.html`)
     .then((response) => response.text())
     .then((headerStr) => {
@@ -40,21 +40,47 @@ export function loadHeader(target) {
       const headerElement = parser
         .parseFromString(headerStr, "text/html")
         .querySelector(".container");
-      headerElement.querySelector(".un-tag").textContent =
-        target.getAttribute("un-tag");
 
+      headerElement.querySelector(".un-tag").textContent =
+        String(uTag).charAt(0).toUpperCase() + String(uTag).slice(1);
       target.appendChild(headerElement);
+    });
+}
+
+export function loadHero(target, uTag) {
+  fetch(`sc-common/components/hero.html`)
+    .then((response) => response.text())
+    .then((heroStr) => {
+      const parser = new DOMParser();
+      const heroElement = parser
+        .parseFromString(heroStr, "text/html")
+        .querySelector(".container");
+
+      // Set number image and title
+      heroElement
+        .querySelector("img")
+        .setAttribute("src", `img/${uTag}/title-number.png`);
+      heroElement.querySelector("h1").textContent =
+        target.getAttribute("data-title");
+
+      target.appendChild(heroElement);
     });
 }
 
 export function loadComponents() {
   let promises = [];
   const components = document.querySelectorAll(".component");
+  const uTag = document.querySelector("main").id;
+
   components.forEach((component) => {
     const componentName = component.getAttribute("name");
     switch (componentName) {
       case "header":
-        loadHeader(component);
+        loadHeader(component, uTag);
+        break;
+
+      case "hero":
+        loadHero(component, uTag);
         break;
 
       default:
@@ -89,7 +115,7 @@ export function loadVideos() {
         const title = video.getAttribute("title");
         const words = title.split(" ");
         const quocient = Math.ceil(
-          words.reduce((sum, str) => sum + str.length, 0) / 4
+          words.reduce((sum, str) => sum + str.length, 0) / 4,
         );
         let count = 0;
         for (let i = 0; i < words.length; i++) {
@@ -138,7 +164,7 @@ export function loadVideos() {
  * @summary Fetches and inserts a callout component into the target element.
  */
 export function loadCallout(target, calloutType) {
-  fetch(`sc-common/components/callout-${calloutType}.html`)
+  return fetch(`sc-common/components/callout-${calloutType}.html`)
     .then((response) => response.text())
     .then((html) => {
       target.innerHTML = html;
@@ -147,7 +173,8 @@ export function loadCallout(target, calloutType) {
       if (calloutType == "glossary") {
         target.querySelector("h6").innerText = target.getAttribute("title");
       }
-      target.querySelector("p").innerHTML = target.getAttribute("text");
+      target.querySelector("div.callout-body").innerHTML =
+        target.getAttribute("text");
     });
 }
 
@@ -178,9 +205,24 @@ export function loadFigures() {
  */
 export function setUpPopovers() {
   const popoverTriggerList = document.querySelectorAll(
-    '[data-bs-toggle="popover"]'
+    '[data-bs-toggle="popover"]',
   );
-  popoverTriggerList.forEach((popoverTriggerEl) => {
+  popoverTriggerList.forEach(async (popoverTriggerEl) => {
+    // Create glossary callout element.
+    const glossary = document.createElement("div");
+    glossary.classList.add("callout");
+    glossary.setAttribute("type", "glossary");
+    glossary.setAttribute("title", popoverTriggerEl.getAttribute("data-title"));
+    glossary.setAttribute(
+      "text",
+      popoverTriggerEl.getAttribute("data-bs-content"),
+    );
+
+    // Set popover content to be the glossary callout element.
+    await loadCallout(glossary, "glossary");
+    popoverTriggerEl.setAttribute("data-bs-content", glossary.outerHTML);
+    console.log(glossary.outerHTML);
+
     const popover = new bootstrap.Popover(popoverTriggerEl, {
       html: true,
     });
@@ -189,19 +231,19 @@ export function setUpPopovers() {
       popover.show();
     });
 
-    popoverTriggerEl.addEventListener("focusout", () => {
-      const _this = popoverTriggerEl;
-      if (!document.querySelector(".popover:focus")) {
-        popover.hide();
-      } else {
-        document
-          .querySelector(".popover")
-          .addEventListener("mouseleave", function handler() {
-            popover.hide();
-            this.removeEventListener("mouseleave", handler);
-          });
-      }
-    });
+    // popoverTriggerEl.addEventListener("focusout", () => {
+    //   const _this = popoverTriggerEl;
+    //   if (!document.querySelector(".popover:focus")) {
+    //     popover.hide();
+    //   } else {
+    //     document
+    //       .querySelector(".popover")
+    //       .addEventListener("mouseleave", function handler() {
+    //         popover.hide();
+    //         this.removeEventListener("mouseleave", handler);
+    //       });
+    //   }
+    // });
   });
 }
 
@@ -221,7 +263,7 @@ export function navigate(option) {
 
   const currentPageURL = window.location.href;
   const currentPage = currentPageURL.substring(
-    currentPageURL.lastIndexOf("/") + 1
+    currentPageURL.lastIndexOf("/") + 1,
   );
   const currentPageIndex = pages.indexOf(currentPage);
   const offset = option === "next" ? 1 : -1;
