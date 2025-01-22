@@ -33,6 +33,9 @@ $container-max-widths: (
 
 // 4. Include any default map overrides here
 
+$accordion-button-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='#{$accordion-icon-color}' class='bi bi-caret-down-fill' viewBox='0 0 16 16'> <path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>");
+$accordion-button-active-icon: $accordion-button-icon;
+
 // 5. Include remainder of required parts
 @import "../../node_modules/bootstrap/scss/maps";
 @import "../../node_modules/bootstrap/scss/mixins";
@@ -43,11 +46,8 @@ $container-max-widths: (
 @import "../../node_modules/bootstrap/scss/bootstrap-grid.scss";
 @import "../../node_modules/bootstrap/scss/popover.scss";
 @import "../../node_modules/bootstrap/scss/transitions.scss";
-
-$accordion-button-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='#{$accordion-icon-color}' class='bi bi-caret-down-fill' viewBox='0 0 16 16'> <path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>");
-$accordion-button-active-icon: $accordion-button-icon;
+@import "../../node_modules/bootstrap/scss/nav.scss";
 @import "../../node_modules/bootstrap/scss/accordion.scss";
-
 @import "../../node_modules/bootstrap/scss/modal.scss";
 
 // @import "../../node_modules/bootstrap/scss/bootstrap.scss";
@@ -73,7 +73,17 @@ $color-shadow-green-300: #93c6bf;
 $color-shadow-green-400: #5fa29b;
 $color-shadow-green-500: #458781;
 
+$color-light-orchid-50: #fbf4fa;
+$color-light-orchid-100: #f8ebf6;
 $color-light-orchid-200: #f2d8ef;
+$color-light-orchid-300: #e1a3d8;
+$color-light-orchid-400: #d98dcd;
+$color-light-orchid-500: #ca6ab7;
+$color-light-orchid-600: #b64c9c;
+$color-light-orchid-700: #9b3b81;
+$color-light-orchid-800: #9b3b81;
+$color-light-orchid-900: #6d2e5b;
+$color-light-orchid-900: #411634;
 
 $color-tonys-pink-200: #f5d8d3;
 
@@ -90,8 +100,10 @@ $color-neutral-white: #ffffff;
 $font-open-sans: "Open Sans";
 $font-playpen-sans: "Playpen Sans";
 
-$list-bullet-nav-1: url("../img/common/bullet-nav.svg");
-$list-bullet-content-1: url("../img/common/bullet-main.svg");
+$list-bullet-nav-1: url("../img/common/bullet-nav-1.svg");
+$list-bullet-content-1: url("../img/common/bullet-main-1.svg");
+$list-bullet-nav-2: url("../img/common/bullet-nav-2.svg");
+$list-bullet-content-2: url("../img/common/bullet-main-2.svg");
 $list-bullet-callout-light: url("../img/common/bullet-callout-light.svg");
 
 /* --- GENERAL --- */
@@ -158,34 +170,37 @@ h5 {
 
 /* --- LISTS --- */
 
-nav {
-  > ul {
-    > li {
-      font-weight: 600;
-
-      &::before {
-        content: $list-bullet-nav-1;
-        vertical-align: -4%;
+@mixin list-style($nav-bullet, $content-bullet) {
+  nav.nav-index {
+    > ul {
+      > li {
+        &::before {
+          content: $nav-bullet;
+        }
       }
+    }
+  }
 
-      > a {
-        color: $color-blue-bell-900;
+  ul:not(.nav) {
+    li {
+      &::before {
+        content: $content-bullet;
       }
     }
   }
 }
 
-ul {
+ul:not(.nav) {
   margin-top: 20px;
   margin-bottom: 30px;
 
   li {
     margin: 1rem 0;
     list-style-type: none;
-    text-indent: -1rem;
+    text-indent: -0.75rem;
 
     &::before {
-      content: $list-bullet-content-1;
+      content: "•";
       display: inline-block;
       vertical-align: -8%;
       margin-right: 0.5rem;
@@ -196,6 +211,23 @@ ul {
     }
     &:last-child {
       margin-bottom: 0;
+    }
+  }
+}
+
+nav.nav-index {
+  > ul {
+    > li {
+      font-weight: 600;
+
+      &::before {
+        content: "‣";
+        vertical-align: -4%;
+      }
+
+      > a {
+        color: $color-blue-bell-900;
+      }
     }
   }
 }
@@ -230,7 +262,7 @@ ul.icon-list {
 
 /* --- TEXT --- */
 
-a {
+a:not(.nav) {
   text-decoration: none;
   font-style: italic;
   font-weight: 600;
@@ -369,7 +401,7 @@ header {
 /* --- CALLOUTS --- */
 
 .callout {
-  margin-top: 5rem;
+  margin-top: 6rem;
   margin-bottom: 2rem;
   margin-left: auto;
   margin-right: auto;
@@ -479,6 +511,29 @@ header {
     }
     > :last-child {
       margin-bottom: 0;
+    }
+  }
+}
+
+ul.custom-round-tabs.nav.nav-tabs {
+  gap: 0.75rem;
+  border-width: 2px;
+
+  > li {
+    margin-bottom: 1px;
+
+    > button {
+      border-width: 2px;
+      border-bottom: none;
+      border-top-left-radius: 1rem;
+      border-top-right-radius: 1rem;
+
+      color: $color-neutral-dark;
+      font-weight: 600;
+
+      &.active {
+        color: $color-neutral-black;
+      }
     }
   }
 }

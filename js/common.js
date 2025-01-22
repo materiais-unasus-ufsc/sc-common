@@ -70,7 +70,7 @@ export function loadHero(target, uTag) {
 export function loadComponents() {
   let promises = [];
   const components = document.querySelectorAll(".component");
-  const uTag = document.querySelector("main").id;
+  const uTag = document.querySelector("body").id;
 
   components.forEach((component) => {
     const componentName = component.getAttribute("name");
@@ -97,7 +97,7 @@ export function loadComponents() {
 }
 
 export function loadVideos() {
-  const module = document.querySelector("main").id.slice(-1);
+  const module = document.querySelector("body").id.slice(-1);
   const videos = document.querySelectorAll(".video");
   videos.forEach((video) => {
     fetch(`img/common/video-cover-${module}.svg`)
@@ -187,7 +187,7 @@ export function loadCallouts() {
 }
 
 export function loadFigures() {
-  const module = document.querySelector("main").id;
+  const module = document.querySelector("body").id;
   let promises = [];
   document.querySelectorAll("figure").forEach((element) => {
     promises.push(helper.loadFigure(module, element.id));
