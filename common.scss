@@ -106,7 +106,39 @@ $list-bullet-nav-2: url("../img/common/bullet-nav-2.svg");
 $list-bullet-content-2: url("../img/common/bullet-main-2.svg");
 $list-bullet-callout-light: url("../img/common/bullet-callout-light.svg");
 
+/* --- MIXINS --- */
+
+@mixin popover-style(
+  $max-width,
+  $header-bg,
+  $header-font-size,
+  $body-bg,
+  $body-font-size,
+  $font-color
+) {
+  max-width: $max-width;
+
+  .popover-header {
+    margin-top: auto;
+    font-size: $header-font-size;
+    background-color: $header-bg;
+    color: $font-color;
+  }
+
+  .popover-body {
+    font-size: $body-font-size;
+    background-color: $body-bg;
+    color: $font-color;
+  }
+
+  .popover-arrow {
+    &::after {
+    }
+  }
+}
+
 /* --- GENERAL --- */
+
 * {
   box-sizing: border-box;
   scroll-margin-top: 120px;
@@ -314,6 +346,10 @@ pre {
 
 section {
   > .row {
+    @include media-breakpoint-down(lg) {
+      gap: 1rem;
+    }
+
     > div {
       > *:first-child {
         margin-top: 0;
@@ -568,7 +604,7 @@ ul.custom-round-tabs.nav.nav-tabs {
 
     font-size: 1.25rem;
     font-style: normal;
-    text-decoration: none;
+    text-decoration: none !important;
     border-radius: 0.75rem;
     border: solid 2px $color-blue-bell-600;
 
