@@ -208,42 +208,10 @@ export function setUpPopovers() {
     '[data-bs-toggle="popover"]',
   );
   popoverTriggerList.forEach(async (popoverTriggerEl) => {
-    // Create glossary callout element.
-    const glossary = document.createElement("div");
-    glossary.classList.add("callout");
-    glossary.setAttribute("type", "glossary");
-    glossary.setAttribute("title", popoverTriggerEl.getAttribute("data-title"));
-    glossary.setAttribute(
-      "text",
-      popoverTriggerEl.getAttribute("data-bs-content"),
-    );
-
-    // Set popover content to be the glossary callout element.
-    await loadCallout(glossary, "glossary");
-    popoverTriggerEl.setAttribute("data-bs-content", glossary.outerHTML);
-    console.log(glossary.outerHTML);
-
     const popover = new bootstrap.Popover(popoverTriggerEl, {
       html: true,
+      trigger: "focus",
     });
-
-    popoverTriggerEl.addEventListener("focus", () => {
-      popover.show();
-    });
-
-    // popoverTriggerEl.addEventListener("focusout", () => {
-    //   const _this = popoverTriggerEl;
-    //   if (!document.querySelector(".popover:focus")) {
-    //     popover.hide();
-    //   } else {
-    //     document
-    //       .querySelector(".popover")
-    //       .addEventListener("mouseleave", function handler() {
-    //         popover.hide();
-    //         this.removeEventListener("mouseleave", handler);
-    //       });
-    //   }
-    // });
   });
 }
 
