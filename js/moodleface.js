@@ -7,6 +7,10 @@ fetch("img/moodleface/moodleface.svg")
     main.insertAdjacentHTML("afterbegin", svg);
   })
   .then(() => {
+    const svg = main.querySelector("svg");
+    svg.removeAttribute("width");
+    svg.removeAttribute("height");
+
     for (let i = 1; i <= 4; i++) {
       const un = main.querySelector(`#un${i}`);
       un.style.cursor = "pointer";
