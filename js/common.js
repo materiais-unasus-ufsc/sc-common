@@ -143,7 +143,7 @@ export function loadVideos() {
           iframe.setAttribute(key, value);
         }
 
-        iframe.style.margin = "20px 0";
+        iframe.style.margin = "30px 0";
         iframe.style.display = "none";
         video.appendChild(iframe);
         video.appendChild(svg);
@@ -151,7 +151,7 @@ export function loadVideos() {
         container.addEventListener("click", () => {
           helper.hideElement(svg);
           helper.showElement(iframe);
-          video.style.backgroundImage = "url(img/common/video-cover-bg.png)";
+          video.style.backgroundImage = "url(img/common/video-cover-bg.svg)";
           video.style.backgroundSize = "cover";
           video.style.backgroundPosition = "center";
           video.style.backgroundRepeat = "no-repeat";
