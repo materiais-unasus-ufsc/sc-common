@@ -215,24 +215,10 @@ export function setUpPopovers() {
   });
 }
 
-export function navigate(option) {
-  const mainPageURL = "https://unasus-cp.moodle.ufsc.br/course/view.php?id=416";
-  const pages = [
-    "sobre.html",
-    // "desafio.html",
-    "un1.html",
-    "un2.html",
-    "un3.html",
-    "un4.html",
-    // "reconhecendo-a-realidade.html",
-    // "questoes-avaliativas.html",
-    // "tomada-de-opiniao.html",
-  ];
-
-  const currentPageURL = window.location.href;
-  const currentPage = currentPageURL.substring(
-    currentPageURL.lastIndexOf("/") + 1,
-  );
+export function navigate(option, mainURL, pages) {
+  const localURL = window.location.href;
+  const currentDomain = localURL.substring(0, localURL.lastIndexOf("/"));
+  const currentPage = localURL.substring(localURL.lastIndexOf("/") + 1);
   const currentPageIndex = pages.indexOf(currentPage);
   const offset = option === "next" ? 1 : -1;
 
@@ -241,10 +227,15 @@ export function navigate(option) {
     currentPageIndex + offset < 0 ||
     currentPageIndex + offset >= pages.length
   ) {
-    window.location.href = mainPageURL;
+    window.location.href = mainURL;
     return;
   }
 
   const nextPage = pages[currentPageIndex + offset];
-  window.location.href = currentPageURL.replace(currentPage, nextPage);
+  const nextPageDomain = nextPage.substring(0, nextPage.lastIndexOf("/"));
+  if (currentDomain != nextPageDomain) {
+    window.location.href = nextPage;
+    return;
+  }
+  window.location.href = localURL.replace(currentPage, nextPage);
 }
