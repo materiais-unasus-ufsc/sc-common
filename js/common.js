@@ -219,7 +219,7 @@ export function navigate(option, mainURL, pages) {
   const localURL = window.location.href;
   const currentDomain = localURL.substring(0, localURL.lastIndexOf("/"));
   const currentPage = localURL.substring(localURL.lastIndexOf("/") + 1);
-  const currentPageIndex = pages.indexOf(currentPage);
+  const currentPageIndex = pages.indexOf("./" + currentPage);
   const offset = option === "next" ? 1 : -1;
 
   if (
@@ -231,10 +231,11 @@ export function navigate(option, mainURL, pages) {
     return;
   }
 
-  const nextPage = pages[currentPageIndex + offset];
-  const nextPageDomain = nextPage.substring(0, nextPage.lastIndexOf("/"));
-  if (currentDomain != nextPageDomain) {
-    window.location.href = nextPage;
+  const nextURL = pages[currentPageIndex + offset];
+  const nextPage = nextURL.substring(nextURL.lastIndexOf("/") + 1);
+  const nextDomain = nextURL.substring(0, nextURL.lastIndexOf("/"));
+  if (currentDomain != nextDomain && nextDomain != ".") {
+    window.location.href = nextURL;
     return;
   }
   window.location.href = localURL.replace(currentPage, nextPage);
