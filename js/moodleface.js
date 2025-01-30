@@ -1,4 +1,9 @@
-/* Configuração do Moodleface. */
+/**
+ * Moodleface script file.
+ * @module moodleface
+ */
+
+import { links } from "../../js/variables.js";
 
 const main = document.querySelector("main");
 fetch("img/moodleface/moodleface.svg")
@@ -11,31 +16,17 @@ fetch("img/moodleface/moodleface.svg")
     svg.removeAttribute("width");
     svg.removeAttribute("height");
 
-    for (let i = 1; i <= 4; i++) {
-      const un = main.querySelector(`#un${i}`);
-      un.style.cursor = "pointer";
-      un.addEventListener("click", () => {
-        window.open(`./un${i}.html`);
+    const chapterButtons = main.querySelectorAll("#chapter-buttons > *");
+    const quizButtons = main.querySelectorAll("#quiz-buttons > *");
+    const sideMenu = main.querySelectorAll("#side-menu > *");
+
+    const buttons = [chapterButtons, quizButtons, sideMenu];
+    buttons.forEach((group) => {
+      group.forEach((button) => {
+        button.style.cursor = "pointer";
+        button.addEventListener("click", () => {
+          window.open(`${links[button.id]}`);
+        });
       });
-    }
-
-    for (let i = 1; i <= 4; i++) {
-      const questions = main.querySelector(`#q${i}`);
-      questions.style.cursor = "pointer";
-    }
-
-    const about = main.querySelector("#about");
-    about.style.cursor = "pointer";
-    main.querySelector("#about").addEventListener("click", () => {
-      window.open("sobre.html");
     });
-
-    const booklet = main.querySelector("#booklet");
-    booklet.style.cursor = "pointer";
-
-    const guide = main.querySelector("#guide");
-    guide.style.cursor = "pointer";
-
-    const media = main.querySelector("#media");
-    media.style.cursor = "pointer";
   });
