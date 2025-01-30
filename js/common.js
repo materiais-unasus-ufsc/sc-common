@@ -99,17 +99,21 @@ export function loadComponents() {
 export function loadVideos() {
   const module = document.querySelector("body").id.slice(-1);
   const videos = document.querySelectorAll(".video");
-  videos.forEach((video) => {
-    fetch(`img/common/video-cover-${module}.svg`)
-      .then((response) => response.text())
-      .then((svgText) => {
-        const parser = new DOMParser();
-        const svg = parser
-          .parseFromString(svgText, "text/html")
-          .querySelector("svg");
+
+  fetch(`img/common/video-cover-${module}.svg`)
+    .then((response) => response.text())
+    .then((svgText) => {
+      const parser = new DOMParser();
+      const svgTemplate = parser
+        .parseFromString(svgText, "text/html")
+        .querySelector("svg");
+
+      videos.forEach((video) => {
+        // Clone the SVG template for each video
+        const svg = svgTemplate.cloneNode(true);
 
         // Update cover title with provided value in the title attribute
-        const spans = svg.querySelector("text").childNodes;
+        const spans = svg.querySelector("text[id='video-title']").childNodes;
         spans.forEach((span) => (span.innerHTML = ""));
 
         const title = video.getAttribute("title");
@@ -157,7 +161,7 @@ export function loadVideos() {
           video.style.backgroundRepeat = "no-repeat";
         });
       });
-  });
+    });
 }
 
 /**
