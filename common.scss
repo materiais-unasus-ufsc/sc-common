@@ -327,16 +327,17 @@ figure {
   align-items: center;
   text-align: center;
 
-  figcaption {
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin-top: 1rem;
-  }
-
   svg {
     max-width: 100%;
     height: auto;
   }
+}
+
+figcaption {
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
 pre {
