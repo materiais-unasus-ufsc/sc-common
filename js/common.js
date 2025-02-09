@@ -244,3 +244,23 @@ export function navigate(option, mainURL, pages) {
   }
   window.location.href = localURL.replace(currentPage, nextPage);
 }
+
+/**
+ * @brief Setup for the dropdown menu in the custom header component.
+ * @param {object} links Object containing the links for the course.
+ */
+export function setupDropdownMenu(links) {
+  const menu = document.getElementById("header-dropdown-menu");
+  if (!menu) {
+    console.error("Header dropdown menu not found!");
+    return;
+  }
+
+  for (const item of menu.children) {
+    const linkElement = item.firstChild;
+    linkElement.setAttribute(
+      "href",
+      links[linkElement.getAttribute("data-name")],
+    );
+  }
+}

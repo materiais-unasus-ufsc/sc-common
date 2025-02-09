@@ -49,6 +49,7 @@ $accordion-button-active-icon: $accordion-button-icon;
 @import "../../node_modules/bootstrap/scss/nav.scss";
 @import "../../node_modules/bootstrap/scss/accordion.scss";
 @import "../../node_modules/bootstrap/scss/modal.scss";
+@import "../../node_modules/bootstrap/scss/dropdown.scss";
 
 // @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
@@ -63,6 +64,7 @@ $color-blue-bell-300: #cacae8;
 $color-blue-bell-400: #aeabda;
 $color-blue-bell-500: #938ccb;
 $color-blue-bell-600: #7b6eb9;
+$color-blue-bell-800: #594c8b;
 $color-blue-bell-900: #4a4072;
 $color-blue-bell-950: #2e294c;
 
@@ -203,7 +205,15 @@ h5 {
 /* --- LISTS --- */
 
 @mixin list-style($nav-bullet, $content-bullet) {
-  nav.nav-index {
+  ul:not(.nav, .dropdown-menu) {
+    > li {
+      &::before {
+        content: $content-bullet;
+      }
+    }
+  }
+
+  .nav-index {
     > ul {
       > li {
         &::before {
@@ -213,29 +223,29 @@ h5 {
     }
   }
 
-  ul:not(.nav) {
+  .arrow-bullets {
     li {
       &::before {
-        content: $content-bullet;
+        content: $nav-bullet !important;
       }
     }
   }
 }
 
-ul:not(.nav) {
+ul:not(.nav, .dropdown-menu) {
   margin-top: 20px;
   margin-bottom: 30px;
 
   li {
     margin: 1rem 0;
     list-style-type: none;
-    text-indent: -0.75rem;
+    text-indent: -1rem;
 
     &::before {
       content: "•";
       display: inline-block;
       vertical-align: -8%;
-      margin-right: 0.5rem;
+      margin-right: 1rem;
     }
 
     &:first-child {
@@ -365,10 +375,10 @@ section {
 /* --- HEADER --- */
 
 header {
-  width: 100%;
+  width: 100vw;
   position: fixed;
   top: 0;
-  z-index: 10000;
+  z-index: 100;
   background-color: $color-blue-bell-500;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 
@@ -404,24 +414,58 @@ header {
   }
 }
 
+#header-dropdown-menu {
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+
+  > li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 0.5rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    &:not(:last-child) {
+      border-bottom: 1px solid $color-blue-bell-200;
+    }
+
+    img {
+      height: 1.5rem;
+    }
+
+    > a {
+      padding: 0.5rem 0;
+      color: $color-blue-bell-800;
+      font-size: 1.125rem;
+      font-style: normal;
+      font-weight: 600;
+      vertical-align: middle;
+    }
+  }
+}
+
 .hero {
   display: flex;
-  align-items: end;
-
   width: 100%;
-  min-height: 400px;
+  /* min-height: 400px; */
   background-image: url("../sc-common/img/common/hero-bg.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
   .title {
-    margin: 10rem 0 4rem;
+    @extend .row;
+
+    margin-top: 10rem;
+    margin-bottom: 3rem;
     padding: 1.5rem;
     border-radius: 1rem;
     background-color: $color-shadow-green-200;
 
-    > .row > :first-child {
+    > :first-child {
+      @extend .col-2, .d-none, .d-lg-flex;
+
       display: flex;
       justify-content: center;
       align-items: center;
@@ -431,6 +475,10 @@ header {
         width: 100%;
         height: auto;
       }
+    }
+
+    > :nth-child(2) {
+      @extend .col;
     }
   }
 }
