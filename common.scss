@@ -59,6 +59,7 @@ $accordion-button-active-icon: $accordion-button-icon;
 /* --- VARIABLES --- */
 
 $color-blue-bell-50: #f6f6fc;
+$color-blue-bell-100: #efeff8;
 $color-blue-bell-200: #e2e2f2;
 $color-blue-bell-300: #cacae8;
 $color-blue-bell-400: #aeabda;
@@ -89,7 +90,17 @@ $color-light-orchid-900: #411634;
 
 $color-tonys-pink-200: #f5d8d3;
 
+$color-new-orleans-50: #fcf9f0;
+$color-new-orleans-100: #f7f0dd;
 $color-new-orleans-200: #efdeb9;
+$color-new-orleans-300: #e7cc99;
+$color-new-orleans-400: #d8a65f;
+$color-new-orleans-500: #d08f3f;
+$color-new-orleans-600: #c27934;
+$color-new-orleans-700: #a1602d;
+$color-new-orleans-800: #814c2b;
+$color-new-orleans-900: #694025;
+$color-new-orleans-950: #381f12;
 
 $color-neutral-black: #292929;
 $color-neutral-daker: #434556;
@@ -191,15 +202,18 @@ h2 {
 }
 h3 {
   font-size: 1.5rem;
-  color: $color-neutral-dark;
+  color: $color-neutral-daker;
   font-weight: bold;
 }
 h4 {
-  font-size: 1.25rem;
-  color: $color-neutral-normal;
+  color: $color-neutral-dark;
+  font-size: 1.5rem;
+  font-weight: 500;
 }
 h5 {
-  font-size: 1.2rem;
+  color: $color-neutral-daker;
+  font-size: 1.25rem;
+  font-weight: 400;
 }
 
 /* --- LISTS --- */
@@ -298,6 +312,19 @@ ul.icon-list {
   li {
     &::before {
       content: $list-bullet-callout-light;
+    }
+  }
+}
+
+ol {
+  > li {
+    margin: 1rem 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 }
@@ -627,15 +654,106 @@ header {
   }
 }
 
+/* --- CUSTOM CARD CUSTOMIZATION --- */
+
+@mixin custom-card-color($title-color, $title-bg-color, $content-bg-color) {
+  .custom-card-title {
+    color: $title-color;
+    background-color: $title-bg-color;
+  }
+  .custom-card-content {
+    background-color: $content-bg-color;
+  }
+}
+
+.custom-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: $color-neutral-daker;
+
+  > *:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  .custom-card-title {
+    padding: 0.75rem 1rem;
+    color: $color-neutral-black;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-align: center;
+    background-color: $color-neutral-normal;
+    border-radius: 1rem;
+  }
+  .custom-card-content {
+    flex-grow: 1;
+    padding: 1.5rem;
+    background-color: $color-neutral-light;
+    border-radius: 1rem;
+
+    > * {
+      &:first-child {
+        margin-top: 0;
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  b {
+    font-weight: 500;
+  }
+
+  &.custom-card-orleans {
+    @include custom-card-color(
+      $title-color: $color-neutral-daker,
+      $title-bg-color: $color-new-orleans-100,
+      $content-bg-color: $color-new-orleans-50
+    );
+  }
+  &.custom-card-blue {
+    @include custom-card-color(
+      $color-neutral-white,
+      $color-blue-bell-950,
+      $color-blue-bell-100
+    );
+  }
+}
+
 /* --- BOOTSTRAP CUSTOMIZATION --- */
 
 .accordion {
+  .accordion-button {
+    font-size: 1.125rem;
+  }
   .accordion-body {
     > :first-child {
       margin-top: 0;
     }
     > :last-child {
       margin-bottom: 0;
+    }
+  }
+}
+
+// TABS
+
+@mixin custom-tabs-color(
+  $border-color,
+  $btn-bg,
+  /* $btn-active-border-color, */ $btn-active-bg
+) {
+  border-color: $border-color;
+
+  > li {
+    > button {
+      background-color: $btn-bg;
+
+      &.active {
+        border-color: $border-color;
+        background-color: $btn-active-bg;
+      }
     }
   }
 }
@@ -661,6 +779,28 @@ ul.custom-round-tabs.nav.nav-tabs {
       }
     }
   }
+
+  &.blue-tabs {
+    @include custom-tabs-color(
+      $color-blue-bell-800,
+      $color-blue-bell-300,
+      $color-blue-bell-500
+    );
+  }
+  &.orchid-tabs {
+    @include custom-tabs-color(
+      $color-light-orchid-500,
+      $color-light-orchid-200,
+      $color-light-orchid-300
+    );
+  }
+  &.orleans-tabs {
+    @include custom-tabs-color(
+      $color-new-orleans-600,
+      $color-new-orleans-200,
+      $color-new-orleans-300
+    );
+  }
 }
 
 /* --- VIDEO --- */
@@ -671,6 +811,56 @@ ul.custom-round-tabs.nav.nav-tabs {
   svg {
     width: 100%;
     height: auto !important;
+  }
+}
+
+/* --- TOPIC --- */
+
+@mixin topic-color($head-bg) {
+  .topic-head {
+    background-color: $head-bg;
+  }
+}
+
+.topic {
+  .topic-head {
+    margin-bottom: -1rem;
+    padding: 3rem 4rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+
+    .topic-content {
+      @extend .col-9;
+
+      h6 {
+        font-family: $font-playpen-sans;
+        color: $color-neutral-daker;
+        font-size: 1.5rem;
+      }
+
+      > *:first-child {
+        margin-top: 0;
+      }
+      > *:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .topic-illustration {
+      @extend .col-3;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  &.topic-blue {
+    @include topic-color($color-blue-bell-100);
+    b {
+      color: $color-neutral-black;
+      font-weight: 500;
+    }
   }
 }
 
