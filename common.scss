@@ -547,6 +547,11 @@ header {
     background-color: $color-blue-bell-900;
     color: $color-blue-bell-50;
 
+    h6 {
+      margin: 0;
+      font-family: $font-playpen-sans, sans-serif;
+      font-size: 1.5rem;
+    }
     a {
       color: $color-blue-bell-200;
     }
