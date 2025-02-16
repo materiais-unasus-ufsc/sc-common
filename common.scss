@@ -88,7 +88,17 @@ $color-light-orchid-800: #9b3b81;
 $color-light-orchid-900: #6d2e5b;
 $color-light-orchid-900: #411634;
 
+$color-tonys-pink-50: #fcf5f4;
+$color-tonys-pink-100: #f9eae7;
 $color-tonys-pink-200: #f5d8d3;
+$color-tonys-pink-300: #edbdb4;
+$color-tonys-pink-400: #e5a498;
+$color-tonys-pink-500: #d27361;
+$color-tonys-pink-600: #bd5845;
+$color-tonys-pink-700: #9e4737;
+$color-tonys-pink-800: #843d30;
+$color-tonys-pink-900: #6e382e;
+$color-tonys-pink-950: #3b1a14;
 
 $color-new-orleans-50: #fcf9f0;
 $color-new-orleans-100: #f7f0dd;
@@ -344,11 +354,7 @@ a:not(.nav) {
 }
 
 blockquote {
-  margin-left: 1rem;
-  margin-right: 2rem;
-  padding-left: 1rem;
-  border-left: 2px solid $color-neutral-dark;
-
+  max-width: 750px;
   font-size: 1.125rem;
   line-height: 1.625rem;
   font-style: italic;
@@ -417,6 +423,8 @@ header {
     margin: 1rem 0;
     max-width: 400px;
     color: $color-neutral-white;
+    font-size: 1.25rem;
+    font-weight: 600;
   }
 
   span.un-tag {
@@ -661,12 +669,18 @@ header {
 
 /* --- CUSTOM CARD CUSTOMIZATION --- */
 
-@mixin custom-card-color($title-color, $title-bg-color, $content-bg-color) {
+@mixin custom-card-color(
+  $title-color,
+  $title-bg-color,
+  $content-color,
+  $content-bg-color
+) {
   .custom-card-title {
     color: $title-color;
     background-color: $title-bg-color;
   }
   .custom-card-content {
+    color: $content-color;
     background-color: $content-bg-color;
   }
 }
@@ -714,14 +728,24 @@ header {
     @include custom-card-color(
       $title-color: $color-neutral-daker,
       $title-bg-color: $color-new-orleans-100,
+      $content-color: $color-neutral-daker,
       $content-bg-color: $color-new-orleans-50
     );
   }
   &.custom-card-blue {
     @include custom-card-color(
-      $color-neutral-white,
-      $color-blue-bell-950,
-      $color-blue-bell-100
+      $title-color: $color-neutral-white,
+      $title-bg-color: $color-blue-bell-950,
+      $content-color: $color-neutral-daker,
+      $content-bg-color: $color-blue-bell-100
+    );
+  }
+  &.custom-card-pink {
+    @include custom-card-color(
+      $color-neutral-black,
+      $color-tonys-pink-400,
+      $color-neutral-black,
+      $color-tonys-pink-200
     );
   }
 }

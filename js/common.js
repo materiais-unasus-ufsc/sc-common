@@ -175,7 +175,7 @@ export function loadCallout(target, calloutType) {
     })
     .then(() => {
       if (calloutType == "glossary") {
-        target.querySelector("h6").innerText = target.getAttribute("title");
+        target.querySelector("h6").innerHTML = target.getAttribute("title");
       }
       target.querySelector("div.callout-body").innerHTML =
         target.getAttribute("text");
