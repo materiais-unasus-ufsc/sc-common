@@ -29,6 +29,12 @@ export function loadFigure(module, fileName) {
         return;
       }
       figure.classList.add("d-none", "d-lg-block");
+      figure.querySelectorAll("a").forEach((link) => {
+        console.log(link);
+        if (link.getAttribute("role") !== "button") {
+          link.setAttribute("target", "_blank");
+        }
+      });
 
       let container = document.querySelector(`figure[id="${fileName}"]`);
       container.insertAdjacentElement("afterbegin", figure);
@@ -98,7 +104,7 @@ export function toggleVisibilitySelector(selector) {
     }
   } else {
     console.error(
-      `toggleVisibilitySelector function could not query ${selector}`
+      `toggleVisibilitySelector function could not query ${selector}`,
     );
   }
 }

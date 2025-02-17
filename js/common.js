@@ -41,8 +41,11 @@ export function loadHeader(target, uTag) {
         .parseFromString(headerStr, "text/html")
         .querySelector(".container");
 
-      headerElement.querySelector(".un-tag").textContent =
-        String(uTag).charAt(0).toUpperCase() + String(uTag).slice(1);
+      if (document.body.id.startsWith("un")) {
+        headerElement.querySelector(".un-tag").textContent =
+          String(uTag).charAt(0).toUpperCase() + String(uTag).slice(1);
+      }
+
       target.appendChild(headerElement);
     });
 }

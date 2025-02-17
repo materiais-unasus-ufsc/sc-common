@@ -113,7 +113,7 @@ $color-new-orleans-900: #694025;
 $color-new-orleans-950: #381f12;
 
 $color-neutral-black: #292929;
-$color-neutral-daker: #434556;
+$color-neutral-darker: #434556;
 $color-neutral-dark: #70728f;
 $color-neutral-normal: #a9abbc;
 $color-neutral-light: #d4d5dd;
@@ -207,23 +207,23 @@ h1 {
 }
 h2 {
   font-size: 2rem;
-  color: $color-neutral-daker;
+  color: $color-neutral-darker;
   font-weight: bold;
 }
 h3 {
   font-size: 1.5rem;
-  color: $color-neutral-daker;
+  color: $color-neutral-darker;
   font-weight: bold;
 }
 h4 {
-  color: $color-neutral-dark;
+  color: $color-neutral-black;
   font-size: 1.5rem;
   font-weight: 500;
 }
 h5 {
-  color: $color-neutral-daker;
+  color: $color-neutral-black;
   font-size: 1.25rem;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 /* --- LISTS --- */
@@ -358,7 +358,7 @@ blockquote {
   font-size: 1.125rem;
   line-height: 1.625rem;
   font-style: italic;
-  color: $color-neutral-daker;
+  color: $color-neutral-darker;
 }
 
 figure {
@@ -645,7 +645,7 @@ header {
 
   h6 {
     font-weight: 500;
-    color: $color-neutral-daker;
+    color: $color-neutral-darker;
     margin-top: 0;
     font-family: $font-playpen-sans;
     font-size: 1.5rem;
@@ -689,7 +689,7 @@ header {
   display: flex;
   flex-direction: column;
   height: 100%;
-  color: $color-neutral-daker;
+  color: $color-neutral-darker;
 
   > *:not(:last-child) {
     margin-bottom: 1rem;
@@ -726,9 +726,9 @@ header {
 
   &.custom-card-orleans {
     @include custom-card-color(
-      $title-color: $color-neutral-daker,
+      $title-color: $color-neutral-darker,
       $title-bg-color: $color-new-orleans-100,
-      $content-color: $color-neutral-daker,
+      $content-color: $color-neutral-darker,
       $content-bg-color: $color-new-orleans-50
     );
   }
@@ -736,7 +736,7 @@ header {
     @include custom-card-color(
       $title-color: $color-neutral-white,
       $title-bg-color: $color-blue-bell-950,
-      $content-color: $color-neutral-daker,
+      $content-color: $color-neutral-darker,
       $content-bg-color: $color-blue-bell-100
     );
   }
@@ -863,7 +863,7 @@ ul.custom-round-tabs.nav.nav-tabs {
 
       h6 {
         font-family: $font-playpen-sans;
-        color: $color-neutral-daker;
+        color: $color-neutral-darker;
         font-size: 1.5rem;
       }
 
