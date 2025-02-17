@@ -257,10 +257,30 @@ export function setupDropdownMenu(links) {
   }
 
   for (const item of menu.children) {
-    const linkElement = item.firstChild;
+    const linkElement = item.querySelector("a");
     linkElement.setAttribute(
       "href",
       links[linkElement.getAttribute("data-name")],
     );
   }
+}
+
+/**
+ * @brief Setup for the quiz call to action component.
+ * @param {object} links Object containing the links for the course.
+ */
+export function setupQuizCTA(links) {
+  const quizCTA = document.querySelector(".quiz-cta");
+  if (!quizCTA) {
+    console.error("No quiz call to action component found!");
+    return;
+  }
+
+  const unNumber = document.body.id.at(-1);
+  console.log(unNumber);
+  quizCTA.querySelector("button").addEventListener("click", () => {
+    window.open(links[`quiz${unNumber}`]);
+  });
+
+  console.debug("[ DEBUG ] Quiz CTA component set up.");
 }
