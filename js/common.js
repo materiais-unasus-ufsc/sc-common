@@ -287,3 +287,69 @@ export function setupQuizCTA(links) {
 
   console.debug("[ DEBUG ] Quiz CTA component set up.");
 }
+
+/**
+ * @brief
+ */
+export function setupReviewQuizes() {
+  document.querySelectorAll(".review-quiz").forEach((quiz) => {
+    console.log(quiz);
+    const form = quiz.querySelector("form");
+    const feedbackField = form.querySelector(".feedback");
+    const feedbackComment = form.getAttribute("data-feedback");
+
+    form.addEventListener("submit", (event) => {
+      const data = new FormData(form);
+      console.debug(`[ REVIEW-QUIZ ] Data: ${[...data.entries()]}`);
+
+      let selected;
+      let answer;
+      let isCorrect = false;
+
+      switch (form.getAttribute("data-type")) {
+        case "single-opt":
+          selected = data.entries().next().value[1];
+          answer = form.getAttribute("data-answer");
+          isCorrect = selected == answer;
+          break;
+
+        case "set-opt":
+          answer = form
+            .getAttribute("data-answer")
+            .split(";")
+            .map((sublist) => new Set(sublist.trim().split(" ")));
+          selected = [...data.values()].map(
+            (sublist) => new Set(sublist.split(" ")),
+          );
+          isCorrect =
+            answer.length == selected.length &&
+            answer.every((value, index) =>
+              [...value].every((x) => selected[index].has(x)),
+            );
+          break;
+
+        case "multi-opt":
+          answer = form.getAttribute("data-answer").split(" ");
+          selected = [...data.values()];
+          isCorrect =
+            answer.length == selected.length &&
+            answer.every((value, index) => value == selected[index]);
+          break;
+      }
+
+      console.debug(`[ REVIEW-QUIZ ] Answer:`);
+      console.debug(answer);
+      console.debug(`[ REVIEW-QUIZ ] Selected:`);
+      console.debug(selected);
+
+      if (isCorrect) {
+        feedbackField.innerHTML = `
+          <strong correct>Resposta correta!</strong>
+          <br><br>${feedbackComment}`;
+      } else {
+        feedbackField.innerHTML = "<strong incorrect>Resposta errada!</strong>";
+      }
+      event.preventDefault();
+    });
+  });
+}

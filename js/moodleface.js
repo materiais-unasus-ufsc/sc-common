@@ -29,4 +29,9 @@ fetch("img/moodleface/moodleface.svg")
         });
       });
     });
+    const startButton = main.querySelector("#about");
+    startButton.style.cursor = "pointer";
+    startButton.addEventListener("click", () => {
+      window.open(links["about"]);
+    });
   });
