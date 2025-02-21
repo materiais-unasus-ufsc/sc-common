@@ -68,6 +68,7 @@ export function showElement(element) {
  * @param {string} targetSelector - The CSS selector for the target element.
  */
 export function toggleVisibility(targetSelector) {
+  console.log("here");
   let target = document.querySelector(targetSelector);
   if (target.style.display == "none") {
     showElement(target);
